@@ -24,6 +24,14 @@ A fully hand-built **variable DC power supply** that converts 220V AC mains into
 
 ---
 
+## Circuit Schematic
+
+![Circuit Schematic](docs/schematic/circuit_schematic.webp)
+
+*Full Proteus simulation schematic — 220V AC source → transformer → bridge rectifier → filter capacitors → MOSFET (IRF740) → output stage, with Arduino UNO + TLP350 optocoupler gate driver*
+
+---
+
 ## How It Works
 
 The power supply follows the classic **AC → DC conversion pipeline**, enhanced with Arduino-based digital control:
@@ -105,8 +113,12 @@ DC-Variable-Power-Supply/
 │   │   ├── front_panel.jpeg            # OLED + knob + terminals
 │   │   ├── top_view.jpeg               # Top panel engraving
 │   │   └── internal_components.jpeg   # Inside: PCB, Arduino, transformer
+│   ├── schematic/
+│   │   └── circuit_schematic.webp      # Full Proteus circuit schematic
 │   └── report/
 │       └── DC_Power_Supply_Report.pdf  # Full project report
+├── simulation/
+│   └── power_circuit.pdsprj            # Proteus simulation project file
 ├── .gitignore
 └── README.md
 ```
