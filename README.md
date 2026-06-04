@@ -22,6 +22,9 @@ A fully hand-built **variable DC power supply** that converts 220V AC mains into
 ![Internal Components](docs/photos/internal_components.jpeg)
 *Inside the box — transformer, PCB, Arduino UNO, OLED module, and filter capacitors*
 
+![LCD Display](docs/photos/lcd_display.webp)
+*LCD showing real-time Duty Cycle (99%) and output Voltage (23.76V)*
+
 ---
 
 ## Circuit Schematic
@@ -102,46 +105,18 @@ The enclosure was designed and laser-cut from wood with:
 
 ---
 
-## Arduino Code
-
-The Arduino reads the potentiometer and drives a **PWM signal via Timer1** at **31.25 kHz** (8-bit Fast PWM, no prescaler), then displays the duty cycle percentage on the LCD in real time.
-
-```cpp
-void setup() {
-  // Fast PWM 8-bit on Timer1, no prescaler → 31.25 kHz
-  TCCR1A = (1 << COM1A1) | (1 << WGM10);
-  TCCR1B = (1 << WGM12)  | (1 << CS10);
-}
-
-void loop() {
-  int pwmValue = map(analogRead(A0), 0, 1023, 0, 255);
-  OCR1A = pwmValue;                          // set duty cycle
-  float pct = (pwmValue / 255.0) * 100.0;   // convert to %
-  lcd.print(pct, 1);                         // display on LCD
-}
-```
-
-Full source: [`src/power_supply.ino`](src/power_supply.ino)
-
-**Dependencies:**
-- `Wire.h` — built-in Arduino I²C library
-- [`DFRobot_LCD`](https://github.com/DFRobot/DFRobot_LCD) — I²C LCD driver
-
----
-
 ## Project Structure
 
 ```
 DC-Variable-Power-Supply/
-├── src/
-│   └── power_supply.ino                # Arduino source code
 ├── docs/
 │   ├── photos/
 │   │   ├── builder_with_device.jpeg    # Yousef holding the finished build
 │   │   ├── enclosure_design.jpeg       # Laser-engraved front panel
 │   │   ├── front_panel.jpeg            # OLED + knob + terminals
 │   │   ├── top_view.jpeg               # Top panel engraving
-│   │   └── internal_components.jpeg   # Inside: PCB, Arduino, transformer
+│   │   ├── internal_components.jpeg   # Inside: PCB, Arduino, transformer
+│   │   └── lcd_display.webp            # LCD showing Duty% and Voltage
 │   ├── schematic/
 │   │   └── circuit_schematic.webp      # Full Proteus circuit schematic
 │   └── report/
