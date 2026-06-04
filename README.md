@@ -105,10 +105,28 @@ The enclosure was designed and laser-cut from wood with:
 
 ---
 
+## Arduino Code
+
+The Arduino reads the potentiometer, drives a **PWM signal via Timer1 at ~31.25 kHz** (eliminates audible switching noise), and displays both duty cycle and output voltage on the LCD in real time.
+
+| LCD Line | Displays | Example |
+|---|---|---|
+| Line 1 | Duty cycle % | `Duty: 99%` |
+| Line 2 | Output voltage | `Volt: 23.76V` |
+
+Full source: [`src/power_supply.ino`](src/power_supply.ino)
+
+**Dependencies:**
+- `LiquidCrystal_I2C` — I²C LCD driver (install via Arduino Library Manager)
+
+---
+
 ## Project Structure
 
 ```
 DC-Variable-Power-Supply/
+├── src/
+│   └── power_supply.ino                # Arduino source code
 ├── docs/
 │   ├── photos/
 │   │   ├── builder_with_device.jpeg    # Yousef holding the finished build
